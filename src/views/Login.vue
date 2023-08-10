@@ -49,6 +49,7 @@
                                 class="elevation-0"
                                 color="#011258"
                                 dark
+                                @click="acceder()"
                                
                             >
                                 <v-icon class="mx-1">login</v-icon>
@@ -78,6 +79,7 @@
 
 <script>
 import HelloWorld from '../components/HelloWorld.vue'
+
 export default {
     components:{
         HelloWorld,
@@ -104,6 +106,12 @@ export default {
 
         tituloNombreSistema (){
             return this.titulo === -1 ? 'Sistema de Control de Insumos': ''
+        }
+    },
+
+    methods: {
+        acceder(){
+            this.$router.push({path:'/inicio'})
         }
     },
 }
