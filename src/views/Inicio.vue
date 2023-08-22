@@ -4,6 +4,7 @@
         <v-navigation-drawer
             v-model="drawer"
             app
+            width="270px"
         >
             <template v-slot:prepend>
                 <v-list-item two-line>
@@ -15,6 +16,25 @@
                 </v-list-item>
             </template>
             <v-divider></v-divider>
+
+            <v-list dense>
+                <v-list-item
+                    v-for="dato in productos"
+                    :key="dato.title"
+                    link
+                    color="#053565"
+                    :to="dato.path"
+                >
+                <v-list-item-icon>
+                    <v-icon>{{ dato.icon }}</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                    <v-list-item-title color="#053565">{{ dato.title }}</v-list-item-title>
+                </v-list-item-content>
+                </v-list-item>
+            </v-list>
+
             <v-list>
             <v-list-group
                 v-for="item in items"
@@ -22,17 +42,22 @@
                 v-model="item.active"
                 :prepend-icon="item.action"
                 no-action
+                color="#053565"
+               
             >
                 <template v-slot:activator>
                 <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    <v-list-item-title color="#053565">{{ item.title }}</v-list-item-title>
                     
                 </v-list-item-content>
                 </template>
 
                 <v-list-item
-                v-for="child in item.items"
-                :key="child.title"
+                    v-for="child in item.items"
+                    :key="child.title"
+                    color="#053565"
+                    link
+                    :to="child.path"
                 >
                 <v-list-item-content>
                      <v-list-item-title>{{ child.title }}</v-list-item-title>
@@ -69,47 +94,36 @@ export default {
         return {
             drawer:null,
             titulo:-1,
+            productos:[
+                { title: 'Productos', icon:'dashboard'}
+            ],
             items: [
+                
+               
                 {
-                action: 'mdi-ticket',
-                items: [{ title: 'List Item' }],
-                title: 'Attractions',
+                    action: 'segment',
+                    items: 
+                        [
+                            { title: 'Categorias', path:'/categoria' },
+                            { title: 'Marcas/Modelos'},
+                            { title: 'Unidades de medidas'},
+                            { title: 'Colores'}
+                        ],
+                    title: 'Parametros',
                 },
+
                 {
-                action: 'mdi-silverware-fork-knife',
-                active: true,
-                items: [
-                    { title: 'Breakfast & brunch' },
-                    { title: 'New American' },
-                    { title: 'Sushi' },
-                ],
-                title: 'Dining',
-                },
-                {
-                action: 'mdi-school',
-                items: [{ title: 'List Item' }],
-                title: 'Education',
-                },
-                {
-                action: 'mdi-human-male-female-child',
-                items: [{ title: 'List Item' }],
-                title: 'Family',
-                },
-                {
-                action: 'mdi-bottle-tonic-plus',
-                items: [{ title: 'List Item' }],
-                title: 'Health',
-                },
-                {
-                action: 'mdi-briefcase',
-                items: [{ title: 'List Item' }],
-                title: 'Office',
-                },
-                {
-                action: 'mdi-tag',
-                items: [{ title: 'List Item' }],
-                title: 'Promotions',
-                },
+                    action: 'location_city',
+                    items: 
+                    [
+                        { title: 'Depositos'},
+                        { title: 'Localizaciones'},
+                        { title: 'Ubicaciones'}
+                    ],
+                    title:'Localidades'
+                }
+
+               
             ],
         
         }
